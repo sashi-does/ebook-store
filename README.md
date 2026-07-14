@@ -135,3 +135,26 @@ npm run dev
 - **Books:** Contains catalog properties (title, author, price, inventory levels, ratings).
 - **Orders:** Maps customer accounts to items purchased, pricing totals, and delivery progress status (`Processing`, `Shipped`, `Delivered`, `Cancelled`).
 - **Reviews:** Enforces scoring scale (1–5) and includes comments, with a unique key index ensuring only one review per book per user.
+
+---
+
+## Deployment
+
+This project is configured to deploy the frontend and backend separately on Vercel.
+
+### 1. Backend Deployment (Vercel Serverless)
+- Create a new project on Vercel and import your repository.
+- Under **Project Settings**, change the **Root Directory** to `backend`.
+- Add the following **Environment Variables**:
+  - `MONGO_URI`: Your MongoDB connection string.
+  - `JWT_SECRET`: Secret key for JWT signing.
+  - `NODE_ENV`: `production`
+- Vercel automatically deploys the entrypoint `/api` (configured via [vercel.json](file:///Users/sashi/Downloads/ebook-store-main/backend/vercel.json)) as a Serverless Function.
+
+### 2. Frontend Deployment (Vercel Static/SPA)
+- Create another new project on Vercel and import your repository.
+- Under **Project Settings**, change the **Root Directory** to `frontend`.
+- Add the following **Environment Variables**:
+  - `VITE_API_BASE_URL`: The URL of your deployed backend (e.g. `https://ebook-store-backend-xi.vercel.app`).
+- Deploy the project. The configuration in [frontend/vercel.json](file:///Users/sashi/Downloads/ebook-store-main/frontend/vercel.json) handles client-side React Router rewrites automatically.
+
